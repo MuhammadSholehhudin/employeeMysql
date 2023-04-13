@@ -34,11 +34,11 @@
           <td>
             <form action="{{ url('employee/'.$data->id)}}" method="POST">
               @csrf
-            <a href="{{ url('employee/'.$data->id.'/edit')}}" type="button" class="btn btn-secondary">
+            <a href="{{ url('employee/'.$data->id.'/edit')}}" type="button" class="btn btn-secondary btn-sm">
               Edit
             </a>
-              <input type="hidden" name="_method" value="DELETE">
-              <button type="submit" class="btn btn-danger">Delete</button>
+              @method('DELETE')
+              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
             </form>
           </td>
         </tr>

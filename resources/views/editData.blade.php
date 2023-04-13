@@ -5,7 +5,7 @@
 <div class="container mt-5"> `
     <h3 class="mb-3">Edit Data</h3>
 <form method="POST" action="{{ url('employee/'.$data->id) }}">
-    <input type="hidden" name="_method" value="PUT"></input>
+    @method('PUT')
     @csrf
   <div class="mb-3">
     <label for="name" class="form-label">Name</label>
