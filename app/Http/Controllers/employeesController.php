@@ -40,7 +40,7 @@ class employeesController extends Controller
         $model->no_telphone = $request->no_telphone;
         $model->save();
 
-        return redirect('/employee');
+        return redirect('/employee')->with('added', 'Succesfully added new data !');
     }
 
     /**
@@ -56,7 +56,10 @@ class employeesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = Employee::find($id);
+        return view('editData', compact(
+            'data'
+        ));
     }
 
     /**
@@ -64,7 +67,13 @@ class employeesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $model = Employee::find($id);
+        $model->name = $request->name;
+        $model->gender = $request->gender;
+        $model->no_telphone = $request->no_telphone;
+        $model->save();
+
+        return redirect('/employee')->with('edited', 'The data successfully updated !');
     }
 
     /**
@@ -72,6 +81,8 @@ class employeesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = Employee::find($id);
+        $data->delete();
+        return redirect('employee')->with('deleted', 'The data has been deleted !');
     }
 }

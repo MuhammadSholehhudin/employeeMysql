@@ -4,6 +4,15 @@
 
 <div class="container mt-3">
 
+@if(session('added'))
+  <div class="alert alert-success">{{session('added')}}</div>
+@elseif(session('deleted'))
+  <div class="alert alert-danger">{{session('deleted')}}</div>
+@elseif(session('edited'))
+  <div class="alert alert-success">{{session('edited')}}</div>
+@endif
+
+
 <a type="button" class="btn btn-primary mb-2" href="{{ url('employee/create') }}">Add Data</a>
     <table class="table table-striped">
       <thead>
@@ -21,10 +30,16 @@
           <th scope="row">{{ $data->id }}</th>
           <td>{{ $data->name }}</td>
           <td>{{ $data->gender }}</td>
-          <td>{{ $data->no_telpon }}</td>
+          <td>{{ $data->no_telphone }}</td>
           <td>
-            <a type="button" class="btn btn-secondary">Edit</a>
-            <a type="button" class="btn btn-danger">Delete</a>
+            <form action="{{ url('employee/'.$data->id)}}" method="POST">
+              @csrf
+            <a href="{{ url('employee/'.$data->id.'/edit')}}" type="button" class="btn btn-secondary">
+              Edit
+            </a>
+              <input type="hidden" name="_method" value="DELETE">
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
           </td>
         </tr>
         @endforeach
